@@ -6,10 +6,7 @@
 <title>Ken Wu · 短影音製作報價</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
-    background: #f9f8f6; color: #1a1a1a; min-height: 100vh; padding: 2rem 1rem;
-  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; background: #f9f8f6; color: #1a1a1a; min-height: 100vh; padding: 2rem 1rem; }
   .container { max-width: 680px; margin: 0 auto; }
 
   .header { margin-bottom: 2rem; }
@@ -21,104 +18,56 @@
   .cases-group { margin-bottom: 10px; }
   .cases-group-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #bbb; font-weight: 600; margin-bottom: 6px; }
   .cases { display: flex; gap: 8px; flex-wrap: wrap; }
-  .case-chip {
-    background: #fff; border: 1px solid #e8e6e1; border-radius: 20px;
-    padding: 6px 14px; font-size: 12px; color: #555; cursor: pointer;
-    transition: border-color 0.15s, background 0.15s; text-decoration: none;
-    display: inline-flex; align-items: center; gap: 4px;
-  }
+  .case-chip { background: #fff; border: 1px solid #e8e6e1; border-radius: 20px; padding: 6px 14px; font-size: 12px; color: #555; cursor: pointer; transition: border-color 0.15s, background 0.15s; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
   .case-chip:hover { border-color: #1a1a1a; background: #f5f4f2; }
   .case-chip strong { color: #1a1a1a; font-weight: 600; }
 
   .divider { border: none; border-top: 1px solid #e8e6e1; margin: 1.5rem 0; }
 
   .step { margin-bottom: 2rem; }
-  .step-header {
-    display: flex; align-items: center; gap: 12px;
-    margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #f0ede8;
-  }
-  .step-num {
-    width: 28px; height: 28px; border-radius: 50%; background: #1a1a1a;
-    color: #fff; font-size: 12px; font-weight: 700;
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
+  .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #f0ede8; }
+  .step-num { width: 28px; height: 28px; border-radius: 50%; background: #1a1a1a; color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .step-title { font-size: 15px; font-weight: 700; color: #1a1a1a; }
   .step-hint { font-size: 12px; color: #aaa; margin-left: auto; }
 
   .option-grid { display: grid; gap: 10px; }
   .option-grid.col2 { grid-template-columns: 1fr 1fr; }
 
-  .opt {
-    background: #fff; border: 2px solid #e8e6e1; border-radius: 14px;
-    padding: 16px; cursor: pointer;
-    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
-    user-select: none; position: relative;
-  }
+  .opt { background: #fff; border: 2px solid #e8e6e1; border-radius: 14px; padding: 16px; cursor: pointer; transition: border-color 0.15s, background 0.15s, box-shadow 0.15s; user-select: none; position: relative; }
   .opt:hover { border-color: #bbb; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-  .opt.selected {
-    border-color: #1a1a1a; background: #fff;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-  }
-  .opt.selected::after {
-    content: '✓'; position: absolute; top: 10px; right: 12px;
-    font-size: 13px; font-weight: 700; color: #1a1a1a;
-  }
-  .opt.disabled {
-    opacity: 0.35; cursor: not-allowed; pointer-events: none;
-  }
+  .opt.selected { border-color: #1a1a1a; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+  .opt.selected::after { content: '✓'; position: absolute; top: 10px; right: 12px; font-size: 13px; font-weight: 700; color: #1a1a1a; }
+  .opt.disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
   .opt-icon { font-size: 18px; margin-bottom: 8px; }
   .opt-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; color: #1a1a1a; }
   .opt-desc { font-size: 12px; color: #888; line-height: 1.55; }
-  .opt-price {
-    font-size: 13px; color: #1a1a1a; font-weight: 600;
-    margin-top: 10px; padding-top: 10px; border-top: 1px solid #f0ede8;
-  }
+  .opt-price { font-size: 13px; color: #1a1a1a; font-weight: 600; margin-top: 10px; padding-top: 10px; border-top: 1px solid #f0ede8; }
   .opt.selected .opt-price { border-top-color: #e0ddd8; }
 
-  .badge {
-    display: inline-block; font-size: 10px; padding: 2px 7px;
-    border-radius: 10px; margin-left: 6px; font-weight: 600; vertical-align: middle;
-  }
+  .badge { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 10px; margin-left: 6px; font-weight: 600; vertical-align: middle; }
   .badge-green { background: #e6f5ec; color: #2d7a4f; }
   .badge-amber { background: #fef3e2; color: #b45309; }
-  .recommend-tag {
-    position: absolute; top: -10px; left: 16px;
-    background: #1a1a1a; color: #fff;
-    font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
-    padding: 3px 10px; border-radius: 10px;
-  }
+  .recommend-tag { position: absolute; top: -10px; left: 16px; background: #1a1a1a; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; padding: 3px 10px; border-radius: 10px; }
 
   .term-panel { display: none; }
   .term-panel.active { display: block; }
-
   .panel-fade { animation: fadeIn 0.2s ease; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
-  .note {
-    background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px;
-    padding: 10px 14px; font-size: 12px; color: #92400e; margin-top: 10px; display: none;
-  }
+  .note { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #92400e; margin-top: 10px; display: none; }
   .note.show { display: block; }
-  .note-info {
-    background: #f0f4ff; border: 1px solid #c7d4f8; border-radius: 8px;
-    padding: 10px 14px; font-size: 12px; color: #3a4fa8; margin-top: 10px;
-  }
+  .note-info { background: #f0f4ff; border: 1px solid #c7d4f8; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #3a4fa8; margin-top: 10px; }
 
+  .qty-btn { padding: 6px 16px; border-radius: 20px; border: 1.5px solid #e8e6e1; background: #fff; font-size: 12px; font-weight: 500; cursor: pointer; font-family: inherit; color: #888; transition: all 0.15s; }
+  .qty-btn.active { border-color: #1a1a1a; background: #1a1a1a; color: #fff; }
+  .qty-btn:hover:not(.active) { border-color: #bbb; }
+
+  /* Addon */
   .addon-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
-  .addon {
-    display: flex; align-items: flex-start; gap: 12px;
-    background: #fff; border: 2px solid #e8e6e1; border-radius: 12px;
-    padding: 14px 16px; cursor: pointer;
-    transition: border-color 0.15s, background 0.15s; user-select: none;
-  }
+  .addon { display: flex; align-items: flex-start; gap: 12px; background: #fff; border: 2px solid #e8e6e1; border-radius: 12px; padding: 14px 16px; cursor: pointer; transition: border-color 0.15s, background 0.15s; user-select: none; }
   .addon:hover { border-color: #bbb; }
   .addon.selected { border-color: #2d7a4f; background: #f5fbf7; }
-  .addon-box {
-    width: 20px; height: 20px; border-radius: 6px; border: 2px solid #ccc;
-    flex-shrink: 0; margin-top: 1px;
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.15s, border-color 0.15s;
-  }
+  .addon-box { width: 20px; height: 20px; border-radius: 6px; border: 2px solid #ccc; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: background 0.15s, border-color 0.15s; }
   .addon.selected .addon-box { background: #2d7a4f; border-color: #2d7a4f; }
   .addon-box svg { display: none; }
   .addon.selected .addon-box svg { display: block; }
@@ -126,34 +75,68 @@
   .addon-price { font-size: 12px; color: #888; margin-top: 3px; line-height: 1.4; }
   .addon.selected .addon-title { color: #2d7a4f; }
 
-  .summary {
-    background: #fff; border: 1px solid #e8e6e1; border-radius: 16px;
-    padding: 1.5rem; margin-bottom: 1.25rem;
-  }
+  /* Survey */
+  .survey-wrap { background: #fff; border: 1px solid #e8e6e1; border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .survey-intro { font-size: 13px; color: #666; line-height: 1.6; margin-bottom: 1.25rem; }
+  .survey-section { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #aaa; font-weight: 700; margin: 1.25rem 0 0.75rem; }
+  .survey-q { margin-bottom: 1rem; }
+  .survey-q label { font-size: 13px; font-weight: 600; color: #1a1a1a; display: block; margin-bottom: 6px; }
+  .survey-q input[type="text"], .survey-q textarea { width: 100%; border: 1.5px solid #e8e6e1; border-radius: 8px; padding: 9px 12px; font-size: 13px; font-family: inherit; color: #1a1a1a; background: #fafaf8; transition: border-color 0.15s; outline: none; }
+  .survey-q input[type="text"]:focus, .survey-q textarea:focus { border-color: #1a1a1a; background: #fff; }
+  .survey-q textarea { min-height: 70px; resize: vertical; }
+  .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .check-item { display: flex; align-items: center; gap: 8px; background: #fafaf8; border: 1.5px solid #e8e6e1; border-radius: 8px; padding: 8px 10px; cursor: pointer; transition: border-color 0.15s, background 0.15s; user-select: none; }
+  .check-item:hover { border-color: #bbb; }
+  .check-item.checked { border-color: #1a1a1a; background: #f5f4f2; }
+  .check-item input { display: none; }
+  .check-box { width: 16px; height: 16px; border-radius: 4px; border: 1.5px solid #ccc; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+  .check-item.checked .check-box { background: #1a1a1a; border-color: #1a1a1a; }
+  .check-box::after { content: '✓'; font-size: 10px; color: #fff; display: none; }
+  .check-item.checked .check-box::after { display: block; }
+  .check-label { font-size: 12px; color: #555; }
+  .check-item.checked .check-label { color: #1a1a1a; font-weight: 500; }
+  .radio-grid { display: grid; gap: 6px; }
+  .radio-item { display: flex; align-items: center; gap: 8px; background: #fafaf8; border: 1.5px solid #e8e6e1; border-radius: 8px; padding: 8px 10px; cursor: pointer; transition: border-color 0.15s, background 0.15s; user-select: none; }
+  .radio-item:hover { border-color: #bbb; }
+  .radio-item.checked { border-color: #1a1a1a; background: #f5f4f2; }
+  .radio-dot { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid #ccc; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+  .radio-item.checked .radio-dot { border-color: #1a1a1a; }
+  .radio-dot::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #1a1a1a; display: none; }
+  .radio-item.checked .radio-dot::after { display: block; }
+  .radio-label { font-size: 12px; color: #555; }
+  .radio-item.checked .radio-label { color: #1a1a1a; font-weight: 500; }
+
+  /* Summary */
+  .summary { background: #fff; border: 1px solid #e8e6e1; border-radius: 16px; padding: 1.5rem; margin-bottom: 1rem; }
   .summary-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #aaa; margin-bottom: 14px; font-weight: 600; }
   .summary-row { display: flex; justify-content: space-between; font-size: 13px; color: #888; margin-bottom: 8px; align-items: center; }
   .summary-row .val { color: #1a1a1a; font-weight: 600; }
-  .summary-total {
-    display: flex; justify-content: space-between; align-items: baseline;
-    font-size: 20px; font-weight: 700; color: #1a1a1a;
-    padding-top: 14px; margin-top: 10px; border-top: 1.5px solid #e8e6e1;
-  }
+  .summary-total { display: flex; justify-content: space-between; align-items: baseline; font-size: 20px; font-weight: 700; color: #1a1a1a; padding-top: 14px; margin-top: 10px; border-top: 1.5px solid #e8e6e1; }
   .summary-total .sub { font-size: 12px; color: #aaa; font-weight: 400; }
-  .summary-note { font-size: 11px; color: #aaa; margin-top: 6px; text-align: right; }
 
-  .cta {
-    width: 100%; padding: 15px; border-radius: 12px; border: none;
-    background: #1a1a1a; color: #fff; font-size: 15px; font-weight: 600;
-    cursor: pointer; font-family: inherit; letter-spacing: 0.01em;
-    transition: opacity 0.15s, transform 0.1s; display: block;
-    text-align: center; text-decoration: none;
-  }
+  /* Copy button */
+  .copy-btn { width: 100%; padding: 13px; border-radius: 12px; border: 2px solid #1a1a1a; background: #fff; color: #1a1a1a; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.15s; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .copy-btn:hover { background: #f5f4f2; }
+  .copy-btn.copied { border-color: #2d7a4f; color: #2d7a4f; background: #f5fbf7; }
+
+  /* CTA */
+  .cta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .cta { padding: 14px; border-radius: 12px; border: none; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; transition: opacity 0.15s, transform 0.1s; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
   .cta:hover { opacity: 0.85; transform: translateY(-1px); }
+  .cta-ig { background: #1a1a1a; color: #fff; }
+  .cta-line { background: #06C755; color: #fff; }
 
-  .notice { font-size: 11px; color: #bbb; text-align: center; margin-top: 12px; line-height: 1.8; }
+  /* LINE QR */
+  .line-qr { background: #fff; border: 1px solid #e8e6e1; border-radius: 14px; padding: 1.25rem; display: flex; align-items: center; gap: 16px; margin-bottom: 1rem; }
+  .line-qr img { width: 80px; height: 80px; border-radius: 8px; flex-shrink: 0; }
+  .line-qr-text p { font-size: 13px; color: #888; line-height: 1.5; }
+  .line-qr-text strong { font-size: 14px; color: #1a1a1a; display: block; margin-bottom: 2px; }
+
+  .notice { font-size: 11px; color: #bbb; text-align: center; margin-top: 10px; line-height: 1.8; }
 
   @media (max-width: 480px) {
-    .option-grid.col2 { grid-template-columns: 1fr; }
+    .option-grid.col2, .check-grid { grid-template-columns: 1fr; }
+    .cta-row { grid-template-columns: 1fr; }
     .cases { gap: 6px; }
   }
 </style>
@@ -228,7 +211,7 @@
         <div class="opt-icon">🎬</div>
         <div class="opt-title">拍攝執行</div>
         <div class="opt-desc">腳本你來，拍攝剪輯交給我。需提供完整逐字稿</div>
-        <div class="opt-price" id="scope-shoot-price"></div>
+        <div class="opt-price"></div>
       </div>
     </div>
     <div class="note" id="phone-shoot-note">📱 手機方案僅提供全案代操，不提供單純拍攝執行服務。</div>
@@ -239,10 +222,9 @@
     <div class="step-header">
       <div class="step-num">3</div>
       <div class="step-title">選合作量 / 長度</div>
-      <div class="step-hint" id="step3-hint">越長越划算</div>
+      <div class="step-hint">越長越划算</div>
     </div>
 
-    <!-- 手機 × 全案代操：4支 -->
     <div class="term-panel active panel-fade" id="panel-phone-full-4">
       <div style="display:flex;gap:8px;margin-bottom:10px;">
         <button class="qty-btn active" onclick="switchQty('4')">4 支／月</button>
@@ -274,7 +256,6 @@
       <div class="note" id="trial-note">💡 試拍通過後可直接銜接長期方案，先確認合作默契再決定。</div>
     </div>
 
-    <!-- 手機 × 全案代操：8支 -->
     <div class="term-panel panel-fade" id="panel-phone-full-8">
       <div style="display:flex;gap:8px;margin-bottom:10px;">
         <button class="qty-btn" onclick="switchQty('4')">4 支／月</button>
@@ -299,7 +280,6 @@
       </div>
     </div>
 
-    <!-- 相機 × 全案代操 -->
     <div class="term-panel panel-fade" id="panel-camera-full">
       <div class="option-grid col2" id="term-camera-full">
         <div class="opt selected" data-val="cam-full-3" data-base="45000" onclick="pickTerm(this,'camera-full')">
@@ -313,10 +293,9 @@
           <div class="opt-price">NT$15,000–20,000／支</div>
         </div>
       </div>
-      <div class="note-info">📷 包含影片架構規劃、腳本企劃、單日專業相機拍攝、後期精剪、專業調色。可依參考帳號風格製作。</div>
+      <div class="note-info">📷 包含影片架構規劃、腳本企劃、單日專業相機拍攝、後期精剪、專業調色。</div>
     </div>
 
-    <!-- 相機 × 拍攝執行 -->
     <div class="term-panel panel-fade" id="panel-camera-shoot">
       <div class="option-grid col2" id="term-camera-shoot">
         <div class="opt selected" data-val="cam-shoot-3" data-base="30000" onclick="pickTerm(this,'camera-shoot')">
@@ -332,7 +311,6 @@
       </div>
       <div class="note-info">⚠️ 腳本請提供完整逐字稿，拍攝前需完成確認，以確保執行效率。</div>
     </div>
-
   </div>
 
   <!-- Step 4 -->
@@ -345,9 +323,7 @@
     <div class="addon-grid">
       <div class="addon" onclick="toggleAddon(this)" data-price="6000" data-name="帳號顧問諮詢">
         <div class="addon-box">
-          <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-            <path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div>
           <div class="addon-title">帳號顧問諮詢</div>
@@ -357,8 +333,126 @@
     </div>
   </div>
 
+  <!-- Step 5: 需求問卷 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">5</div>
+      <div class="step-title">填寫需求問卷</div>
+      <div class="step-hint">約 3 分鐘</div>
+    </div>
+    <div class="survey-wrap">
+      <p class="survey-intro">幫助我在諮詢前掌握你的需求，讓第一次對話更有效率 🎬</p>
+
+      <div class="survey-section">👤 關於你</div>
+
+      <div class="survey-q">
+        <label>Q1. 你的名字 / 品牌名稱</label>
+        <input type="text" id="sq1" placeholder="請填寫">
+      </div>
+      <div class="survey-q">
+        <label>Q2. 你的 Instagram 帳號</label>
+        <input type="text" id="sq2" placeholder="@yourhandle，沒有請填「無」">
+      </div>
+      <div class="survey-q">
+        <label>Q3. 你的職業 / 品牌類型</label>
+        <div class="check-grid" id="sq3">
+          <div class="radio-item" onclick="pickRadio('sq3',this)"><div class="radio-dot"></div><span class="radio-label">自由工作者</span></div>
+          <div class="radio-item" onclick="pickRadio('sq3',this)"><div class="radio-dot"></div><span class="radio-label">教育 / 教練</span></div>
+          <div class="radio-item" onclick="pickRadio('sq3',this)"><div class="radio-dot"></div><span class="radio-label">美食 / 餐飲</span></div>
+          <div class="radio-item" onclick="pickRadio('sq3',this)"><div class="radio-dot"></div><span class="radio-label">美容 / 時尚</span></div>
+          <div class="radio-item" onclick="pickRadio('sq3',this)"><div class="radio-dot"></div><span class="radio-label">生活風格</span></div>
+          <div class="radio-item" onclick="pickRadio('sq3',this)"><div class="radio-dot"></div><span class="radio-label">旅遊 / 戶外</span></div>
+          <div class="radio-item" onclick="pickRadio('sq3',this)"><div class="radio-dot"></div><span class="radio-label">藝術 / 設計</span></div>
+          <div class="radio-item" onclick="pickRadio('sq3',this)"><div class="radio-dot"></div><span class="radio-label">其他</span></div>
+        </div>
+      </div>
+
+      <div class="survey-section">🎯 關於目標</div>
+
+      <div class="survey-q">
+        <label>Q4. 你希望短影音幫你達成什麼？（可複選）</label>
+        <div class="check-grid" id="sq4">
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">增加追蹤人數</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">建立個人品牌形象</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">吸引潛在客戶</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">銷售產品 / 服務</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">增加曝光與知名度</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">記錄生活與分享</span></div>
+        </div>
+      </div>
+      <div class="survey-q">
+        <label>Q5. 你的目標受眾是誰？</label>
+        <input type="text" id="sq5" placeholder="例如：25–35 歲想斜槓的上班族女性">
+      </div>
+
+      <div class="survey-section">📱 關於現況</div>
+
+      <div class="survey-q">
+        <label>Q6. 你目前有在拍或發短影音嗎？</label>
+        <div class="radio-grid" id="sq6">
+          <div class="radio-item" onclick="pickRadio('sq6',this)"><div class="radio-dot"></div><span class="radio-label">還沒開始</span></div>
+          <div class="radio-item" onclick="pickRadio('sq6',this)"><div class="radio-dot"></div><span class="radio-label">偶爾有拍，但沒在發</span></div>
+          <div class="radio-item" onclick="pickRadio('sq6',this)"><div class="radio-dot"></div><span class="radio-label">有在發，但成效不理想</span></div>
+          <div class="radio-item" onclick="pickRadio('sq6',this)"><div class="radio-dot"></div><span class="radio-label">已有穩定在發</span></div>
+        </div>
+      </div>
+      <div class="survey-q">
+        <label>Q7. 你最大的卡關點是什麼？（可複選）</label>
+        <div class="check-grid" id="sq7">
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">不知道要拍什麼</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">拍出來很普通，沒有風格</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">剪輯不會</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">沒有個人風格</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">沒時間持續更新</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">不上鏡 / 不敢出鏡</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">沒有設備</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">其他</span></div>
+        </div>
+      </div>
+      <div class="survey-q">
+        <label>Q8. 你想要什麼樣的影片風格？（可複選）</label>
+        <div class="check-grid" id="sq8">
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">電影感 / 有質感</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">溫暖自然</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">清新簡潔</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">活潑有趣</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">專業俐落</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">文青獨特</span></div>
+        </div>
+      </div>
+      <div class="survey-q">
+        <label>有特別欣賞的帳號或參考影片？（可貼連結）</label>
+        <input type="text" id="sq8b" placeholder="https://...">
+      </div>
+
+      <div class="survey-section">🤝 關於合作</div>
+
+      <div class="survey-q">
+        <label>Q9. 你希望我參與到什麼程度？</label>
+        <div class="radio-grid" id="sq9">
+          <div class="radio-item" onclick="pickRadio('sq9',this)"><div class="radio-dot"></div><span class="radio-label">全交給你（企劃＋拍攝＋剪輯）</span></div>
+          <div class="radio-item" onclick="pickRadio('sq9',this)"><div class="radio-dot"></div><span class="radio-label">我來拍，你幫我剪</span></div>
+        </div>
+      </div>
+      <div class="survey-q">
+        <label>Q10. 預算大概落在哪個範圍？</label>
+        <div class="radio-grid" id="sq10">
+          <div class="radio-item" onclick="pickRadio('sq10',this)"><div class="radio-dot"></div><span class="radio-label">NT$3,000–8,000</span></div>
+          <div class="radio-item" onclick="pickRadio('sq10',this)"><div class="radio-dot"></div><span class="radio-label">NT$8,000–20,000</span></div>
+          <div class="radio-item" onclick="pickRadio('sq10',this)"><div class="radio-dot"></div><span class="radio-label">NT$20,000 以上</span></div>
+          <div class="radio-item" onclick="pickRadio('sq10',this)"><div class="radio-dot"></div><span class="radio-label">彈性，看方案再決定</span></div>
+        </div>
+      </div>
+      <div class="survey-q">
+        <label>Q11. 還有什麼想讓我知道的？</label>
+        <textarea id="sq11" placeholder="任何補充、特殊需求、或想問的問題都可以寫在這"></textarea>
+      </div>
+    </div>
+  </div>
+
   <hr class="divider">
 
+  <!-- Summary -->
   <div class="summary">
     <div class="summary-label">你的方案組合</div>
     <div class="summary-row"><span>設備</span><span class="val" id="s-eq">手機拍攝</span></div>
@@ -371,9 +465,30 @@
     </div>
   </div>
 
-  <a class="cta" href="https://www.instagram.com/ken.wu.0515" target="_blank">
-    根據這個組合，直接 DM 詢價 →
-  </a>
+  <!-- Copy button -->
+  <button class="copy-btn" id="copy-btn" onclick="copyAll()">
+    <span id="copy-icon">📋</span> 複製完整方案＋問卷內容
+  </button>
+
+  <!-- CTA -->
+  <div class="cta-row">
+    <a class="cta cta-ig" href="https://www.instagram.com/ken.wu.0515" target="_blank">
+      📸 IG 私訊詢價
+    </a>
+    <a class="cta cta-line" href="https://line.me/ti/p/KuOA2lVrAo" target="_blank">
+      💬 LINE 聯絡
+    </a>
+  </div>
+
+  <!-- LINE QR -->
+  <div class="line-qr">
+    <img src="https://qr-official.line.me/sid/L/KuOA2lVrAo.png" onerror="this.style.display='none'" alt="LINE QR Code">
+    <div class="line-qr-text">
+      <strong>掃描加入 LINE</strong>
+      <p>填完問卷後，複製內容直接傳給我<br>我會在 1–2 個工作天內與你聯絡，安排 15 分鐘免費諮詢 ☕️</p>
+    </div>
+  </div>
+
   <p class="notice">
     以上均為未稅價格 · 如需開立發票另加 5%<br>
     報價有效期 14 天 · 場地／交通／道具費另計
@@ -381,29 +496,16 @@
 
 </div>
 
-<style>
-  .qty-btn {
-    padding: 6px 16px; border-radius: 20px; border: 1.5px solid #e8e6e1;
-    background: #fff; font-size: 12px; font-weight: 500; cursor: pointer;
-    font-family: inherit; color: #888; transition: all 0.15s;
-  }
-  .qty-btn.active { border-color: #1a1a1a; background: #1a1a1a; color: #fff; }
-  .qty-btn:hover:not(.active) { border-color: #bbb; }
-</style>
-
 <script>
   const state = {
-    eq: 'phone',
-    scope: 'full',
-    qty: '4',
+    eq: 'phone', scope: 'full', qty: '4',
     termValues: {
       'phone-full-4': { val: 'monthly', base: 24000, label: '月繳 · 4 支', unit: '每月' },
       'phone-full-8': { val: 'monthly8', base: 46400, label: '月繳 · 8 支以上', unit: '每月' },
-      'camera-full':  { val: 'cam-full-3', base: 45000, label: '3 支', unit: '總計參考' },
-      'camera-shoot': { val: 'cam-shoot-3', base: 30000, label: '3 支', unit: '總計參考' },
+      'camera-full':  { val: 'cam-full-3', base: 45000, label: '全案代操 · 3 支', unit: '總計參考' },
+      'camera-shoot': { val: 'cam-shoot-3', base: 30000, label: '拍攝執行 · 3 支', unit: '總計參考' },
     },
-    addons: 0,
-    addonNames: []
+    addons: 0, addonNames: []
   };
 
   function currentPanel() {
@@ -414,19 +516,16 @@
   function showPanel(id) {
     document.querySelectorAll('.term-panel').forEach(p => p.classList.remove('active'));
     const el = document.getElementById('panel-' + id);
-    if (el) { el.classList.add('active'); void el.offsetWidth; el.classList.add('panel-fade'); }
+    if (el) { el.classList.add('active'); void el.offsetWidth; }
   }
 
   function pickEq(el) {
     document.querySelectorAll('#eq .opt').forEach(c => c.classList.remove('selected'));
     el.classList.add('selected');
     state.eq = el.dataset.val;
-
     const shootOpt = document.getElementById('scope-shoot');
     const phoneNote = document.getElementById('phone-shoot-note');
-
     if (state.eq === 'phone') {
-      // 手機：強制回到全案代操
       state.scope = 'full';
       document.querySelectorAll('#scope .opt').forEach(c => c.classList.remove('selected'));
       document.querySelector('#scope .opt[data-val="full"]').classList.add('selected');
@@ -436,9 +535,7 @@
       shootOpt.classList.remove('disabled');
       phoneNote.classList.remove('show');
     }
-
-    showPanel(currentPanel());
-    render();
+    showPanel(currentPanel()); render();
   }
 
   function pickScope(el) {
@@ -446,43 +543,35 @@
     document.querySelectorAll('#scope .opt').forEach(c => c.classList.remove('selected'));
     el.classList.add('selected');
     state.scope = el.dataset.val;
-    showPanel(currentPanel());
-    render();
+    showPanel(currentPanel()); render();
   }
 
   function switchQty(q) {
     state.qty = q;
-    showPanel(currentPanel());
-    render();
+    showPanel(currentPanel()); render();
   }
 
+  const termLabels = {
+    trial:'試拍單支', monthly:'月繳 · 4 支', '3m':'簽約 3 個月 · 4 支', '6m':'簽約半年 · 4 支',
+    monthly8:'月繳 · 8 支以上', '3m8':'簽約 3 個月 · 8 支以上', '6m8':'簽約半年 · 8 支以上',
+    'cam-full-3':'全案代操 · 3 支', 'cam-full-6':'全案代操 · 6 支',
+    'cam-shoot-3':'拍攝執行 · 3 支', 'cam-shoot-6':'拍攝執行 · 6 支'
+  };
+  const termUnits = {
+    trial:'單次', monthly:'每月', '3m':'每月', '6m':'每月',
+    monthly8:'每月', '3m8':'每月', '6m8':'每月',
+    'cam-full-3':'總計參考', 'cam-full-6':'總計參考',
+    'cam-shoot-3':'總計參考', 'cam-shoot-6':'總計參考'
+  };
+
   function pickTerm(el, panelKey) {
-    const gridId = 'term-' + panelKey.replace('phone-full-', 'phone-').replace('camera-', 'camera-');
-    // 找到正確的 grid
     const panel = document.getElementById('panel-' + panelKey);
     panel.querySelectorAll('.opt').forEach(c => c.classList.remove('selected'));
     el.classList.add('selected');
-
     const trialNote = document.getElementById('trial-note');
     if (trialNote) trialNote.classList.toggle('show', el.dataset.val === 'trial');
-
-    const termLabels = {
-      trial: '試拍單支', monthly: '月繳 · 4 支', '3m': '簽約 3 個月 · 4 支',
-      '6m': '簽約半年 · 4 支', monthly8: '月繳 · 8 支以上', '3m8': '簽約 3 個月 · 8 支以上',
-      '6m8': '簽約半年 · 8 支以上', 'cam-full-3': '全案代操 · 3 支',
-      'cam-full-6': '全案代操 · 6 支', 'cam-shoot-3': '拍攝執行 · 3 支',
-      'cam-shoot-6': '拍攝執行 · 6 支'
-    };
-    const termUnits = {
-      trial: '單次', monthly: '每月', '3m': '每月', '6m': '每月',
-      monthly8: '每月', '3m8': '每月', '6m8': '每月',
-      'cam-full-3': '總計參考', 'cam-full-6': '總計參考',
-      'cam-shoot-3': '總計參考', 'cam-shoot-6': '總計參考'
-    };
-
     state.termValues[panelKey] = {
-      val: el.dataset.val,
-      base: parseInt(el.dataset.base),
+      val: el.dataset.val, base: parseInt(el.dataset.base),
       label: termLabels[el.dataset.val] || el.dataset.val,
       unit: termUnits[el.dataset.val] || ''
     };
@@ -493,12 +582,8 @@
     const price = parseInt(el.dataset.price);
     const name = el.dataset.name;
     el.classList.toggle('selected');
-    if (el.classList.contains('selected')) {
-      state.addons += price; state.addonNames.push(name);
-    } else {
-      state.addons -= price;
-      state.addonNames = state.addonNames.filter(n => n !== name);
-    }
+    if (el.classList.contains('selected')) { state.addons += price; state.addonNames.push(name); }
+    else { state.addons -= price; state.addonNames = state.addonNames.filter(n => n !== name); }
     render();
   }
 
@@ -507,15 +592,86 @@
     const scopeLabel = { full: '全案代操', shoot: '拍攝執行' };
     document.getElementById('s-eq').textContent = eqLabel[state.eq];
     document.getElementById('s-scope').textContent = scopeLabel[state.scope];
-
-    const panel = currentPanel();
-    const tv = state.termValues[panel];
+    const tv = state.termValues[currentPanel()];
     document.getElementById('s-term').textContent = tv ? tv.label : '—';
     document.getElementById('s-unit').textContent = tv ? tv.unit + ' · ' : '';
-
     document.getElementById('s-addon').textContent = state.addonNames.length ? state.addonNames.join('、') : '—';
     const base = tv ? tv.base : 0;
     document.getElementById('s-total').textContent = 'NT$' + (base + state.addons).toLocaleString();
+  }
+
+  // Radio & checkbox helpers
+  function pickRadio(groupId, el) {
+    document.querySelectorAll('#' + groupId + ' .radio-item').forEach(r => r.classList.remove('checked'));
+    el.classList.add('checked');
+  }
+  function toggleCheck(el) { el.classList.toggle('checked'); }
+
+  function getChecked(groupId) {
+    return Array.from(document.querySelectorAll('#' + groupId + ' .check-item.checked .check-label')).map(e => e.textContent);
+  }
+  function getRadio(groupId) {
+    const el = document.querySelector('#' + groupId + ' .radio-item.checked .radio-label');
+    return el ? el.textContent : '（未填）';
+  }
+
+  function copyAll() {
+    const tv = state.termValues[currentPanel()];
+    const total = tv ? tv.base + state.addons : 0;
+    const eqLabel = { phone: '手機拍攝', camera: '相機拍攝' };
+    const scopeLabel = { full: '全案代操', shoot: '拍攝執行' };
+
+    const sq4 = getChecked('sq4');
+    const sq7 = getChecked('sq7');
+    const sq8 = getChecked('sq8');
+
+    const lines = [
+      '═══════════════════════════',
+      '  Ken Wu 短影音製作｜詢價單',
+      '═══════════════════════════',
+      '',
+      '▌ 方案組合',
+      `  設備        ${eqLabel[state.eq]}`,
+      `  服務範圍    ${scopeLabel[state.scope]}`,
+      `  合作方案    ${tv ? tv.label : '—'}`,
+      `  加購項目    ${state.addonNames.length ? state.addonNames.join('、') : '無'}`,
+      `  參考費用    NT$${total.toLocaleString()}（${tv ? tv.unit : ''}，未稅）`,
+      '',
+      '───────────────────────────',
+      '▌ 需求問卷',
+      '',
+      '【關於我】',
+      `  姓名／品牌  ${document.getElementById('sq1').value || '（未填）'}`,
+      `  IG 帳號     ${document.getElementById('sq2').value || '（未填）'}`,
+      `  職業類型    ${getRadio('sq3')}`,
+      '',
+      '【目標】',
+      `  希望達成    ${sq4.length ? sq4.join('、') : '（未選）'}`,
+      `  目標受眾    ${document.getElementById('sq5').value || '（未填）'}`,
+      '',
+      '【現況】',
+      `  目前狀況    ${getRadio('sq6')}`,
+      `  卡關點      ${sq7.length ? sq7.join('、') : '（未選）'}`,
+      `  偏好風格    ${sq8.length ? sq8.join('、') : '（未選）'}`,
+      `  參考帳號    ${document.getElementById('sq8b').value || '（未填）'}`,
+      '',
+      '【合作期望】',
+      `  參與程度    ${getRadio('sq9')}`,
+      `  預算範圍    ${getRadio('sq10')}`,
+      `  補充說明    ${document.getElementById('sq11').value || '（無）'}`,
+      '',
+      '═══════════════════════════',
+    ];
+
+    navigator.clipboard.writeText(lines.join('\n')).then(() => {
+      const btn = document.getElementById('copy-btn');
+      btn.classList.add('copied');
+      btn.innerHTML = '<span>✅</span> 已複製！直接貼給 Ken 即可';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = '<span>📋</span> 複製完整方案＋問卷內容';
+      }, 3000);
+    });
   }
 
   render();
