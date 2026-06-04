@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ken Wu · 短影音製作報價</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    background: #f9f8f6; color: #1a1a1a; min-height: 100vh; padding: 2rem 1rem;
+  }
+  .container { max-width: 680px; margin: 0 auto; }
+
+  .header { margin-bottom: 2rem; }
+  .header-tag { display: inline-block; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #888; margin-bottom: 10px; }
+  .header h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .header p { font-size: 14px; color: #888; }
+
+  .cases-section { margin-bottom: 2rem; }
+  .cases-group { margin-bottom: 10px; }
+  .cases-group-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #bbb; font-weight: 600; margin-bottom: 6px; }
+  .cases { display: flex; gap: 8px; flex-wrap: wrap; }
+  .case-chip {
+    background: #fff; border: 1px solid #e8e6e1; border-radius: 20px;
+    padding: 6px 14px; font-size: 12px; color: #555; cursor: pointer;
+    transition: border-color 0.15s, background 0.15s; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .case-chip:hover { border-color: #1a1a1a; background: #f5f4f2; }
+  .case-chip strong { color: #1a1a1a; font-weight: 600; }
+
+  .divider { border: none; border-top: 1px solid #e8e6e1; margin: 1.5rem 0; }
+
+  .step { margin-bottom: 2rem; }
+  .step-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #f0ede8;
+  }
+  .step-num {
+    width: 28px; height: 28px; border-radius: 50%; background: #1a1a1a;
+    color: #fff; font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .step-title { font-size: 15px; font-weight: 700; color: #1a1a1a; }
+  .step-hint { font-size: 12px; color: #aaa; margin-left: auto; }
+
+  .option-grid { display: grid; gap: 10px; }
+  .option-grid.col2 { grid-template-columns: 1fr 1fr; }
+
+  .opt {
+    background: #fff; border: 2px solid #e8e6e1; border-radius: 14px;
+    padding: 16px; cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    user-select: none; position: relative;
+  }
+  .opt:hover { border-color: #bbb; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .opt.selected {
+    border-color: #1a1a1a; background: #fff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  }
+  .opt.selected::after {
+    content: '✓'; position: absolute; top: 10px; right: 12px;
+    font-size: 13px; font-weight: 700; color: #1a1a1a;
+  }
+  .opt.disabled {
+    opacity: 0.35; cursor: not-allowed; pointer-events: none;
+  }
+  .opt-icon { font-size: 18px; margin-bottom: 8px; }
+  .opt-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; color: #1a1a1a; }
+  .opt-desc { font-size: 12px; color: #888; line-height: 1.55; }
+  .opt-price {
+    font-size: 13px; color: #1a1a1a; font-weight: 600;
+    margin-top: 10px; padding-top: 10px; border-top: 1px solid #f0ede8;
+  }
+  .opt.selected .opt-price { border-top-color: #e0ddd8; }
+
+  .badge {
+    display: inline-block; font-size: 10px; padding: 2px 7px;
+    border-radius: 10px; margin-left: 6px; font-weight: 600; vertical-align: middle;
+  }
+  .badge-green { background: #e6f5ec; color: #2d7a4f; }
+  .badge-amber { background: #fef3e2; color: #b45309; }
+  .recommend-tag {
+    position: absolute; top: -10px; left: 16px;
+    background: #1a1a1a; color: #fff;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+    padding: 3px 10px; border-radius: 10px;
+  }
+
+  .term-panel { display: none; }
+  .term-panel.active { display: block; }
+
+  .panel-fade { animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  .note {
+    background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px;
+    padding: 10px 14px; font-size: 12px; color: #92400e; margin-top: 10px; display: none;
+  }
+  .note.show { display: block; }
+  .note-info {
+    background: #f0f4ff; border: 1px solid #c7d4f8; border-radius: 8px;
+    padding: 10px 14px; font-size: 12px; color: #3a4fa8; margin-top: 10px;
+  }
+
+  .addon-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+  .addon {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: #fff; border: 2px solid #e8e6e1; border-radius: 12px;
+    padding: 14px 16px; cursor: pointer;
+    transition: border-color 0.15s, background 0.15s; user-select: none;
+  }
+  .addon:hover { border-color: #bbb; }
+  .addon.selected { border-color: #2d7a4f; background: #f5fbf7; }
+  .addon-box {
+    width: 20px; height: 20px; border-radius: 6px; border: 2px solid #ccc;
+    flex-shrink: 0; margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .addon.selected .addon-box { background: #2d7a4f; border-color: #2d7a4f; }
+  .addon-box svg { display: none; }
+  .addon.selected .addon-box svg { display: block; }
+  .addon-title { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+  .addon-price { font-size: 12px; color: #888; margin-top: 3px; line-height: 1.4; }
+  .addon.selected .addon-title { color: #2d7a4f; }
+
+  .summary {
+    background: #fff; border: 1px solid #e8e6e1; border-radius: 16px;
+    padding: 1.5rem; margin-bottom: 1.25rem;
+  }
+  .summary-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #aaa; margin-bottom: 14px; font-weight: 600; }
+  .summary-row { display: flex; justify-content: space-between; font-size: 13px; color: #888; margin-bottom: 8px; align-items: center; }
+  .summary-row .val { color: #1a1a1a; font-weight: 600; }
+  .summary-total {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 20px; font-weight: 700; color: #1a1a1a;
+    padding-top: 14px; margin-top: 10px; border-top: 1.5px solid #e8e6e1;
+  }
+  .summary-total .sub { font-size: 12px; color: #aaa; font-weight: 400; }
+  .summary-note { font-size: 11px; color: #aaa; margin-top: 6px; text-align: right; }
+
+  .cta {
+    width: 100%; padding: 15px; border-radius: 12px; border: none;
+    background: #1a1a1a; color: #fff; font-size: 15px; font-weight: 600;
+    cursor: pointer; font-family: inherit; letter-spacing: 0.01em;
+    transition: opacity 0.15s, transform 0.1s; display: block;
+    text-align: center; text-decoration: none;
+  }
+  .cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  .notice { font-size: 11px; color: #bbb; text-align: center; margin-top: 12px; line-height: 1.8; }
+
+  @media (max-width: 480px) {
+    .option-grid.col2 { grid-template-columns: 1fr; }
+    .cases { gap: 6px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="header-tag">短影音製作報價</div>
+    <h1>Ken Wu</h1>
+    <p>台中影像製作 · @ken.wu.0515</p>
+  </div>
+
+  <div class="cases-section">
+    <div class="cases-group">
+      <div class="cases-group-label">📱 手機拍攝案例</div>
+      <div class="cases">
+        <a class="case-chip" href="https://www.instagram.com/doctor.kuo/" target="_blank"><strong>大俠</strong> 500 粉絲 → 10 萬粉</a>
+        <a class="case-chip" href="https://www.instagram.com/coolbau_return/" target="_blank"><strong>酷柏返點</strong> 韓國返點內容</a>
+      </div>
+    </div>
+    <div class="cases-group">
+      <div class="cases-group-label">📷 相機拍攝案例</div>
+      <div class="cases">
+        <a class="case-chip" href="https://www.instagram.com/fukiraworks/" target="_blank"><strong>福鵲製酒</strong> 品牌短影音</a>
+        <a class="case-chip" href="https://www.instagram.com/reel/DV8fNBZEYvu/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank"><strong>林瑄 × Levi's</strong> 廣告合作</a>
+        <a class="case-chip" href="https://www.instagram.com/louishsieh.mov/" target="_blank"><strong>Louis</strong> 短影音合作</a>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Step 1 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">選設備</div>
+      <div class="step-hint">影片質感的起點</div>
+    </div>
+    <div class="option-grid col2" id="eq">
+      <div class="opt selected" data-val="phone" onclick="pickEq(this)">
+        <div class="opt-icon">📱</div>
+        <div class="opt-title">手機拍攝</div>
+        <div class="opt-desc">輕量快速，高頻產出，節奏感強、貼近真實感</div>
+        <div class="opt-price">NT$5,400 起／支</div>
+      </div>
+      <div class="opt" data-val="camera" onclick="pickEq(this)">
+        <div class="opt-icon">📷</div>
+        <div class="opt-title">相機拍攝</div>
+        <div class="opt-desc">高質感口播短影音，適合品牌廣告與形象影片</div>
+        <div class="opt-price">NT$10,000 起／支</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">選服務範圍</div>
+      <div class="step-hint">你要我介入多深？</div>
+    </div>
+    <div class="option-grid col2" id="scope">
+      <div class="opt selected" data-val="full" onclick="pickScope(this)">
+        <div class="opt-icon">✨</div>
+        <div class="opt-title">全案代操</div>
+        <div class="opt-desc">企劃 + 腳本 + 拍攝 + 剪輯 + 調色，從 0 到完成</div>
+        <div class="opt-price">含完整策略規劃</div>
+      </div>
+      <div class="opt" id="scope-shoot" data-val="shoot" onclick="pickScope(this)">
+        <div class="opt-icon">🎬</div>
+        <div class="opt-title">拍攝執行</div>
+        <div class="opt-desc">腳本你來，拍攝剪輯交給我。需提供完整逐字稿</div>
+        <div class="opt-price" id="scope-shoot-price"></div>
+      </div>
+    </div>
+    <div class="note" id="phone-shoot-note">📱 手機方案僅提供全案代操，不提供單純拍攝執行服務。</div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">選合作量 / 長度</div>
+      <div class="step-hint" id="step3-hint">越長越划算</div>
+    </div>
+
+    <!-- 手機 × 全案代操：4支 -->
+    <div class="term-panel active panel-fade" id="panel-phone-full-4">
+      <div style="display:flex;gap:8px;margin-bottom:10px;">
+        <button class="qty-btn active" onclick="switchQty('4')">4 支／月</button>
+        <button class="qty-btn" onclick="switchQty('8')">8 支以上／月</button>
+      </div>
+      <div class="option-grid col2" id="term-phone-4">
+        <div class="opt" data-val="trial" data-base="6000" onclick="pickTerm(this,'phone-full-4')">
+          <div class="opt-title">試拍單支</div>
+          <div class="opt-desc">確認合作默契，再決定長期方案</div>
+          <div class="opt-price">NT$6,000</div>
+        </div>
+        <div class="opt selected" data-val="monthly" data-base="24000" onclick="pickTerm(this,'phone-full-4')">
+          <div class="opt-title">月繳</div>
+          <div class="opt-desc">彈性合作，無簽約壓力</div>
+          <div class="opt-price">NT$6,000／支 · NT$24,000／月</div>
+        </div>
+        <div class="opt" data-val="3m" data-base="22800" onclick="pickTerm(this,'phone-full-4')">
+          <div class="opt-title">簽約 3 個月 <span class="badge badge-amber">95折</span></div>
+          <div class="opt-desc">穩定產出節奏</div>
+          <div class="opt-price">NT$5,700／支 · NT$22,800／月</div>
+        </div>
+        <div class="opt" data-val="6m" data-base="21600" onclick="pickTerm(this,'phone-full-4')">
+          <div class="recommend-tag">✦ 最推薦</div>
+          <div class="opt-title">簽約半年 <span class="badge badge-green">9折</span></div>
+          <div class="opt-desc">等於免費多拿 2 支影片</div>
+          <div class="opt-price">NT$5,400／支 · NT$21,600／月</div>
+        </div>
+      </div>
+      <div class="note" id="trial-note">💡 試拍通過後可直接銜接長期方案，先確認合作默契再決定。</div>
+    </div>
+
+    <!-- 手機 × 全案代操：8支 -->
+    <div class="term-panel panel-fade" id="panel-phone-full-8">
+      <div style="display:flex;gap:8px;margin-bottom:10px;">
+        <button class="qty-btn" onclick="switchQty('4')">4 支／月</button>
+        <button class="qty-btn active" onclick="switchQty('8')">8 支以上／月</button>
+      </div>
+      <div class="option-grid col2" id="term-phone-8">
+        <div class="opt selected" data-val="monthly8" data-base="46400" onclick="pickTerm(this,'phone-full-8')">
+          <div class="opt-title">月繳</div>
+          <div class="opt-desc">彈性合作，無簽約壓力</div>
+          <div class="opt-price">NT$5,800／支 · NT$46,400／月</div>
+        </div>
+        <div class="opt" data-val="3m8" data-base="44000" onclick="pickTerm(this,'phone-full-8')">
+          <div class="opt-title">簽約 3 個月 <span class="badge badge-amber">95折</span></div>
+          <div class="opt-desc">穩定產出節奏</div>
+          <div class="opt-price">NT$5,500／支 · NT$44,000／月</div>
+        </div>
+        <div class="opt" data-val="6m8" data-base="41600" onclick="pickTerm(this,'phone-full-8')">
+          <div class="opt-title">簽約半年 <span class="badge badge-green">9折</span></div>
+          <div class="opt-desc">等於免費多拿近 5 支影片</div>
+          <div class="opt-price">NT$5,200／支 · NT$41,600／月</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 相機 × 全案代操 -->
+    <div class="term-panel panel-fade" id="panel-camera-full">
+      <div class="option-grid col2" id="term-camera-full">
+        <div class="opt selected" data-val="cam-full-3" data-base="45000" onclick="pickTerm(this,'camera-full')">
+          <div class="opt-title">3 支</div>
+          <div class="opt-desc">單次合作，品牌形象或廣告素材，最低合作量</div>
+          <div class="opt-price">NT$15,000–20,000／支</div>
+        </div>
+        <div class="opt" data-val="cam-full-6" data-base="90000" onclick="pickTerm(this,'camera-full')">
+          <div class="opt-title">6 支</div>
+          <div class="opt-desc">持續產出，建立品牌影像風格</div>
+          <div class="opt-price">NT$15,000–20,000／支</div>
+        </div>
+      </div>
+      <div class="note-info">📷 包含影片架構規劃、腳本企劃、單日專業相機拍攝、後期精剪、專業調色。可依參考帳號風格製作。</div>
+    </div>
+
+    <!-- 相機 × 拍攝執行 -->
+    <div class="term-panel panel-fade" id="panel-camera-shoot">
+      <div class="option-grid col2" id="term-camera-shoot">
+        <div class="opt selected" data-val="cam-shoot-3" data-base="30000" onclick="pickTerm(this,'camera-shoot')">
+          <div class="opt-title">3 支</div>
+          <div class="opt-desc">單次合作，最低合作量</div>
+          <div class="opt-price">NT$10,000–15,000／支</div>
+        </div>
+        <div class="opt" data-val="cam-shoot-6" data-base="60000" onclick="pickTerm(this,'camera-shoot')">
+          <div class="opt-title">6 支</div>
+          <div class="opt-desc">持續產出，建立品牌影像風格</div>
+          <div class="opt-price">NT$10,000–15,000／支</div>
+        </div>
+      </div>
+      <div class="note-info">⚠️ 腳本請提供完整逐字稿，拍攝前需完成確認，以確保執行效率。</div>
+    </div>
+
+  </div>
+
+  <!-- Step 4 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div class="step-title">加購服務</div>
+      <div class="step-hint">讓合作更有深度</div>
+    </div>
+    <div class="addon-grid">
+      <div class="addon" onclick="toggleAddon(this)" data-price="6000" data-name="帳號顧問諮詢">
+        <div class="addon-box">
+          <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+            <path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="addon-title">帳號顧問諮詢</div>
+          <div class="addon-price">NT$6,000／月 · 每月 1 次深度討論內容策略、爆片邏輯分析</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="summary">
+    <div class="summary-label">你的方案組合</div>
+    <div class="summary-row"><span>設備</span><span class="val" id="s-eq">手機拍攝</span></div>
+    <div class="summary-row"><span>服務範圍</span><span class="val" id="s-scope">全案代操</span></div>
+    <div class="summary-row"><span>合作方案</span><span class="val" id="s-term">月繳 · 4 支</span></div>
+    <div class="summary-row"><span>加購項目</span><span class="val" id="s-addon">—</span></div>
+    <div class="summary-total">
+      <span>參考費用</span>
+      <span><span class="sub" id="s-unit">每月 · </span><span class="sub">未稅 </span><span id="s-total">NT$24,000</span></span>
+    </div>
+  </div>
+
+  <a class="cta" href="https://www.instagram.com/ken.wu.0515" target="_blank">
+    根據這個組合，直接 DM 詢價 →
+  </a>
+  <p class="notice">
+    以上均為未稅價格 · 如需開立發票另加 5%<br>
+    報價有效期 14 天 · 場地／交通／道具費另計
+  </p>
+
+</div>
+
+<style>
+  .qty-btn {
+    padding: 6px 16px; border-radius: 20px; border: 1.5px solid #e8e6e1;
+    background: #fff; font-size: 12px; font-weight: 500; cursor: pointer;
+    font-family: inherit; color: #888; transition: all 0.15s;
+  }
+  .qty-btn.active { border-color: #1a1a1a; background: #1a1a1a; color: #fff; }
+  .qty-btn:hover:not(.active) { border-color: #bbb; }
+</style>
+
+<script>
+  const state = {
+    eq: 'phone',
+    scope: 'full',
+    qty: '4',
+    termValues: {
+      'phone-full-4': { val: 'monthly', base: 24000, label: '月繳 · 4 支', unit: '每月' },
+      'phone-full-8': { val: 'monthly8', base: 46400, label: '月繳 · 8 支以上', unit: '每月' },
+      'camera-full':  { val: 'cam-full-3', base: 45000, label: '3 支', unit: '總計參考' },
+      'camera-shoot': { val: 'cam-shoot-3', base: 30000, label: '3 支', unit: '總計參考' },
+    },
+    addons: 0,
+    addonNames: []
+  };
+
+  function currentPanel() {
+    if (state.eq === 'phone') return 'phone-full-' + state.qty;
+    return 'camera-' + state.scope;
+  }
+
+  function showPanel(id) {
+    document.querySelectorAll('.term-panel').forEach(p => p.classList.remove('active'));
+    const el = document.getElementById('panel-' + id);
+    if (el) { el.classList.add('active'); void el.offsetWidth; el.classList.add('panel-fade'); }
+  }
+
+  function pickEq(el) {
+    document.querySelectorAll('#eq .opt').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    state.eq = el.dataset.val;
+
+    const shootOpt = document.getElementById('scope-shoot');
+    const phoneNote = document.getElementById('phone-shoot-note');
+
+    if (state.eq === 'phone') {
+      // 手機：強制回到全案代操
+      state.scope = 'full';
+      document.querySelectorAll('#scope .opt').forEach(c => c.classList.remove('selected'));
+      document.querySelector('#scope .opt[data-val="full"]').classList.add('selected');
+      shootOpt.classList.add('disabled');
+      phoneNote.classList.add('show');
+    } else {
+      shootOpt.classList.remove('disabled');
+      phoneNote.classList.remove('show');
+    }
+
+    showPanel(currentPanel());
+    render();
+  }
+
+  function pickScope(el) {
+    if (el.classList.contains('disabled')) return;
+    document.querySelectorAll('#scope .opt').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    state.scope = el.dataset.val;
+    showPanel(currentPanel());
+    render();
+  }
+
+  function switchQty(q) {
+    state.qty = q;
+    showPanel(currentPanel());
+    render();
+  }
+
+  function pickTerm(el, panelKey) {
+    const gridId = 'term-' + panelKey.replace('phone-full-', 'phone-').replace('camera-', 'camera-');
+    // 找到正確的 grid
+    const panel = document.getElementById('panel-' + panelKey);
+    panel.querySelectorAll('.opt').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+
+    const trialNote = document.getElementById('trial-note');
+    if (trialNote) trialNote.classList.toggle('show', el.dataset.val === 'trial');
+
+    const termLabels = {
+      trial: '試拍單支', monthly: '月繳 · 4 支', '3m': '簽約 3 個月 · 4 支',
+      '6m': '簽約半年 · 4 支', monthly8: '月繳 · 8 支以上', '3m8': '簽約 3 個月 · 8 支以上',
+      '6m8': '簽約半年 · 8 支以上', 'cam-full-3': '全案代操 · 3 支',
+      'cam-full-6': '全案代操 · 6 支', 'cam-shoot-3': '拍攝執行 · 3 支',
+      'cam-shoot-6': '拍攝執行 · 6 支'
+    };
+    const termUnits = {
+      trial: '單次', monthly: '每月', '3m': '每月', '6m': '每月',
+      monthly8: '每月', '3m8': '每月', '6m8': '每月',
+      'cam-full-3': '總計參考', 'cam-full-6': '總計參考',
+      'cam-shoot-3': '總計參考', 'cam-shoot-6': '總計參考'
+    };
+
+    state.termValues[panelKey] = {
+      val: el.dataset.val,
+      base: parseInt(el.dataset.base),
+      label: termLabels[el.dataset.val] || el.dataset.val,
+      unit: termUnits[el.dataset.val] || ''
+    };
+    render();
+  }
+
+  function toggleAddon(el) {
+    const price = parseInt(el.dataset.price);
+    const name = el.dataset.name;
+    el.classList.toggle('selected');
+    if (el.classList.contains('selected')) {
+      state.addons += price; state.addonNames.push(name);
+    } else {
+      state.addons -= price;
+      state.addonNames = state.addonNames.filter(n => n !== name);
+    }
+    render();
+  }
+
+  function render() {
+    const eqLabel = { phone: '手機拍攝', camera: '相機拍攝' };
+    const scopeLabel = { full: '全案代操', shoot: '拍攝執行' };
+    document.getElementById('s-eq').textContent = eqLabel[state.eq];
+    document.getElementById('s-scope').textContent = scopeLabel[state.scope];
+
+    const panel = currentPanel();
+    const tv = state.termValues[panel];
+    document.getElementById('s-term').textContent = tv ? tv.label : '—';
+    document.getElementById('s-unit').textContent = tv ? tv.unit + ' · ' : '';
+
+    document.getElementById('s-addon').textContent = state.addonNames.length ? state.addonNames.join('、') : '—';
+    const base = tv ? tv.base : 0;
+    document.getElementById('s-total').textContent = 'NT$' + (base + state.addons).toLocaleString();
+  }
+
+  render();
+</script>
+</body>
+</html>
