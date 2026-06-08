@@ -326,7 +326,7 @@
         </div>
         <div>
           <div class="addon-title">帳號顧問諮詢</div>
-          <div class="addon-price">NT$6,000／月 · 每月 1 次深度討論內容策略、爆片邏輯分析</div>
+          <div class="addon-price">NT$6,000／月 · 每月 1 次 2 小時深度復盤，涵蓋當月內容回顧、影片腳本分析與下月策略規劃，LINE 隨時提問，帳號問題即時回覆</div>
         </div>
       </div>
     </div>
@@ -607,41 +607,34 @@
     const sq8 = getChecked('sq8');
 
     const lines = [
-      '═══════════════════════════',
-      '  Ken Wu 短影音製作｜詢價單',
-      '═══════════════════════════',
+      'Ken Wu 短影音製作｜詢價單',
       '',
-      '▌ 方案組合',
-      `  設備        ${eqLabel[state.eq]}`,
-      `  服務範圍    ${scopeLabel[state.scope]}`,
-      `  合作方案    ${tv ? tv.label : '—'}`,
-      `  加購項目    ${state.addonNames.length ? state.addonNames.join('、') : '無'}`,
-      `  參考費用    NT$${total.toLocaleString()}（${tv ? tv.unit : ''}，未稅）`,
+      '📦 方案組合',
+      `設備：${eqLabel[state.eq]}`,
+      `服務範圍：${scopeLabel[state.scope]}`,
+      `合作方案：${tv ? tv.label : '—'}`,
+      `加購項目：${state.addonNames.length ? state.addonNames.join('、') : '無'}`,
+      `參考費用：NT$${total.toLocaleString()}（${tv ? tv.unit : ''}，未稅）`,
       '',
-      '───────────────────────────',
-      '▌ 需求問卷',
+      '📋 需求問卷',
       '',
-      '【關於我】',
-      `  姓名／品牌  ${document.getElementById('sq1').value || '（未填）'}`,
-      `  IG 帳號     ${document.getElementById('sq2').value || '（未填）'}`,
-      `  職業類型    ${getRadio('sq3')}`,
+      '👤 關於我',
+      `姓名／品牌：${document.getElementById('sq1').value || '（未填）'}`,
+      `IG 帳號：${document.getElementById('sq2').value || '（未填）'}`,
+      `職業類型：${getRadio('sq3')}`,
       '',
-      '【目標】',
-      `  希望達成    ${sq4.length ? sq4.join('、') : '（未選）'}`,
-      `  目標受眾    ${document.getElementById('sq5').value || '（未填）'}`,
+      '🎯 目標',
+      `希望達成：${sq4.length ? sq4.join('、') : '（未選）'}`,
+      `目標受眾：${document.getElementById('sq5').value || '（未填）'}`,
       '',
-      '【現況】',
-      `  目前狀況    ${getRadio('sq6')}`,
-      `  卡關點      ${sq7.length ? sq7.join('、') : '（未選）'}`,
-      `  偏好風格    ${sq8.length ? sq8.join('、') : '（未選）'}`,
-      `  參考帳號    ${document.getElementById('sq8b').value || '（未填）'}`,
+      '📱 現況',
+      `目前狀況：${getRadio('sq6')}`,
+      `卡關點：${sq7.length ? sq7.join('、') : '（未選）'}`,
+      `參考帳號：${document.getElementById('sq8b').value || '（未填）'}`,
       '',
-      '【合作期望】',
-      `  參與程度    ${getRadio('sq9')}`,
-      `  預算範圍    ${getRadio('sq10')}`,
-      `  補充說明    ${document.getElementById('sq11').value || '（無）'}`,
-      '',
-      '═══════════════════════════',
+      '🤝 合作期望',
+      `預算範圍：${getRadio('sq10')}`,
+      `補充說明：${document.getElementById('sq11').value || '（無）'}`,
     ];
 
     navigator.clipboard.writeText(lines.join('\n')).then(() => {
